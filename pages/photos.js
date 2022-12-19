@@ -1,10 +1,10 @@
 import Layout from "../components/layout";
 import Head from "next/head";
-import { TOKEN, DATABASE_ID_PROJECTS } from "../config/index";
-import ProjectItem from "../components/projects/project-item";
+import { TOKEN, DATABASE_ID_PHOTOS } from "../config/index";
+import PhotoItem from "../components/photos/photo-item";
 
-export default function Projects({ projects }) {
-  console.log("projects", projects);
+export default function Photos({ photos }) {
+  console.log("projects", photos);
   return (
     <>
       <Layout>
@@ -15,16 +15,14 @@ export default function Projects({ projects }) {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <h1>
-            Total Projects:
-            <span className="pl-4 text-blue-500">
-              {projects.results.length}
-            </span>
+            Total photos:
+            <span className="pl-4 text-blue-500">{photos.results.length}</span>
           </h1>
 
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {projects.results &&
-              projects.results.map((aProject) => (
-                <ProjectItem key={aProject.id} data={aProject} />
+            {photos.results &&
+              photos.results.map((aPhoto) => (
+                <PhotoItem key={aPhoto.id} data={aPhoto} />
               ))}
           </div>
         </div>
@@ -54,18 +52,11 @@ export async function getStaticProps() {
   };
 
   const res = await fetch(
-    `https://api.notion.com/v1/databases/${DATABASE_ID_PROJECTS}/query`,
+    `https://api.notion.com/v1/databases/${DATABASE_ID_PHOTOS}/query`,
     options
   );
-  const projects = await res.json();
-  // const projectIds = projects.results.map((project) => project.id);
-  // console.log("project.id", projectIds);
-
-  // const projectNames = projects.results.map(
-  //   (project) => project.properties.Name.title[0]?.plain_text
-  // );
-
+  const photos = await res.json();
   return {
-    props: { projects }, // will be passed to the page component as props
+    props: { photos }, // will be passed to the page component as props
   };
 }

@@ -31,6 +31,9 @@ export default function Header() {
             <Link href="/projects" legacyBehavior>
               <a className="mr-5 hover:text-gray-900">프로젝트</a>
             </Link>
+            <Link href="/photos" legacyBehavior>
+              <a className="mr-5 hover:text-gray-900">사진첩</a>
+            </Link>
             <Link
               href="https://smart-factory-lee-joon-ho.tistory.com/"
               legacyBehavior
